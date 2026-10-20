@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Parcial: Teses e Dissertações PGCOMP/UFBA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Estilos extraídos e adaptados do modelo padrão de relatórios PGCOMP */
+:root {
+  --bg: #f6f7f9; --papel: #ffffff; --fg: #1a2230; --suave: #566173; --linha: #d8dde5;
+  --acento: #1d4f7a; --acento-fundo: #e8f0f7; --aviso: #7a4b00; --aviso-fundo: #fff3dc;
+  --ok: #1f6b3a; --ok-fundo: #e5f3ea; --codigo-fundo: #eef1f5;
+  --f-titulo: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-texto: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11161d; --papel: #171e27; --fg: #e3e8ef; --suave: #9aa6b6; --linha: #2c3643;
+  --acento: #8cbde6; --acento-fundo: #1c2a39; --aviso: #f0c574; --aviso-fundo: #2e2515;
+  --ok: #8fd3a6; --ok-fundo: #16291e; --codigo-fundo: #1f2833; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11161d; --papel: #171e27; --fg: #e3e8ef; --suave: #9aa6b6; --linha: #2c3643;
+  --acento: #8cbde6; --acento-fundo: #1c2a39; --aviso: #f0c574; --aviso-fundo: #2e2515;
+  --ok: #8fd3a6; --ok-fundo: #16291e; --codigo-fundo: #1f2833; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--f-texto); font-size: 17px; line-height: 1.6; margin: 0; }
+.pagina { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 72px; }
+@media (min-width: 1040px) { .pagina { grid-template-columns: 250px minmax(0, 1fr); } }
+
+nav.sumario { font-size: 14px; line-height: 1.45; }
+@media (min-width: 1040px) { nav.sumario { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; } }
+nav.sumario h2 { font-family: var(--f-texto); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--suave); margin: 0 0 8px; }
+nav.sumario ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+nav.sumario a { color: var(--fg); text-decoration: none; display: block; padding: 2px 0; }
+nav.sumario a:hover, nav.sumario a:focus-visible { color: var(--acento); text-decoration: underline; }
+
+main { min-width: 0; background: var(--papel); border: 1px solid var(--linha); border-radius: 6px; padding-inline: clamp(18px, 5vw, 64px); padding-block: 48px 64px; }
+.texto { max-width: 70ch; }
+
+h1, h2, h3, h4 { font-family: var(--f-titulo); text-wrap: balance; line-height: 1.25; color: var(--fg); }
+h1 { font-size: clamp(30px, 4.4vw, 42px); font-weight: 700; margin: 8px 0 12px; }
+h2 { font-size: 27px; font-weight: 700; margin: 56px 0 14px; padding-top: 18px; border-top: 1px solid var(--linha); }
+h3 { font-size: 20px; font-weight: 600; margin: 32px 0 8px; }
+h4 { font-size: 17px; font-weight: 600; margin: 22px 0 6px; font-family: var(--f-texto); }
+
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 14px; padding-left: 22px; }
+li { margin-bottom: 4px; }
+a { color: var(--acento); }
+
+.sobretitulo { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--suave); font-weight: 600; }
+.subtitulo { font-size: 19px; color: var(--suave); margin-bottom: 24px; max-width: 62ch; }
+
+.ficha { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px 28px; margin: 24px 0 8px; padding: 18px 0; border-block: 1px solid var(--linha); font-size: 15px; }
+.ficha div { min-width: 0; }
+.ficha dt { color: var(--suave); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.ficha dd { margin: 2px 0 0; font-weight: 600; }
+
+code, .mono { font-family: var(--f-mono); font-size: .86em; background: var(--codigo-fundo); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+pre.cmd { font-family: var(--f-mono); font-size: 13.5px; background: var(--codigo-fundo); padding: 14px 16px; border-radius: 4px; overflow-x: auto; line-height: 1.5; margin: 0 0 16px; }
+
+.nota { border-left: 3px solid var(--aviso); background: var(--aviso-fundo); padding: 12px 16px; margin: 16px 0 20px; border-radius: 0 4px 4px 0; font-size: 15.5px; }
+.nota strong { color: var(--aviso); }
+.nota.ok { border-left-color: var(--ok); background: var(--ok-fundo); }
+.nota.ok strong { color: var(--ok); }
+
+.tabela { overflow-x: auto; margin: 12px 0 22px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-size: 13.5px; color: var(--suave); padding-bottom: 6px; caption-side: top; }
+th, td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--linha); }
+th { font-weight: 700; font-size: 13px; letter-spacing: .03em; color: var(--suave); border-bottom: 2px solid var(--linha); }
+td.num, th.num { text-align: right; white-space: nowrap; }
+
+.barras { display: grid; gap: 7px; margin: 14px 0 6px; }
+.barra-linha { display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: 10px; align-items: center; }
+.barra-par { display: grid; gap: 3px; }
+.barra { height: 11px; border-radius: 2px; background: var(--acento); }
+.barra.b2 { background: transparent; box-shadow: inset 0 0 0 1.5px var(--acento); }
+.barra-rotulo { display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--suave); font-variant-numeric: tabular-nums; }
+
+.status { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .03em; padding: 1px 7px; border-radius: 10px; white-space: nowrap; }
+.s-feito { background: var(--ok-fundo); color: var(--ok); }
+.s-parcial { background: var(--aviso-fundo); color: var(--aviso); }
+.s-nao { background: var(--codigo-fundo); color: var(--suave); }
+
+.rodape { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--linha); font-size: 14px; color: var(--suave); }
+:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<div class="pagina">
+<nav class="sumario" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#apresentacao">1. Apresentação</a></li>
+    <li><a href="#contexto">2. Panorama Histórico (2013–2024)</a></li>
+    <li><a href="#quadrienal">3. Análise da Quadrienal 2021–2024</a></li>
+    <li><a href="#linhas">4. Linhas de Pesquisa e Áreas</a></li>
+    <li><a href="#orientadores">5. Orientações e Corpo Docente</a></li>
+    <li><a href="#perfil">6. Perfil, Vínculo e Idioma</a></li>
+    <li><a href="#ods">7. Transversalidade e os ODS</a></li>
+    <li><a href="#capes">8. Inserção no Relatório CAPES</a></li>
+    <li><a href="#reproducao">9. Reprodutibilidade</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="texto">
+<div class="sobretitulo">PGCOMP/UFBA · Avaliação de Permanência CAPES</div>
+<h1>Levantamento e Análise de Teses e Dissertações no PGCOMP</h1>
+<p class="subtitulo">Relatório consolidado sobre a produção discente de trabalhos de conclusão (2013–2024) e direcionamentos para a Quadrienal 2025–2028.</p>
+
+<dl class="ficha">
+  <div><dt>Programa</dt><dd>PGCOMP / UFBA</dd></div>
+  <div><dt>Base Analisada</dt><dd>Sucupira / CAPES (303 registros)</dd></div>
+  <div><dt>Período Coberto</dt><dd>2013 a 2024</dd></div>
+  <div><dt>Total Defesas</dt><dd>224 Mestrados · 79 Doutorados</dd></div>
+  <div><dt>Foco Avaliativo</dt><dd>Quesito 2.1 (Teses e Dissertações)</dd></div>
+  <div><dt>Situação em</dt><dd>Outubro / 2026</dd></div>
+</dl>
+
+<!-- ===================================================== 1 -->
+<h2 id="apresentacao">1. Apresentação</h2>
+<p>Este relatório apresenta o diagnóstico técnico abrangente sobre as <strong>teses de doutorado e dissertações de mestrado</strong> defendidas no Programa de Pós-Graduação em Ciência da Computação da Universidade Federal da Bahia (PGCOMP/UFBA). O levantamento cobre a totalidade dos registros históricos disponibilizados via Plataforma Sucupira/CAPES no período de 2013 a 2024 (303 trabalhos), detalhando com especial atenção o desempenho da quadrienal recém-concluída (2021–2024).</p>
+<p>A finalidade primária deste documento é subsidiar a redação do <strong>Quesito 2 (Formação e Produção Intelectual - Item 2.1)</strong> da Ficha de Avaliação CAPES do ciclo 2025–2028, oferecendo indicadores consolidados sobre tempo de formação, distribuição por linha de pesquisa, volume por orientador, perfil do discente e a aderência transversal aos Objetivos de Desenvolvimento Sustentável (ODS).</p>
+
+<!-- ===================================================== 2 -->
+<h2 id="contexto">2. Panorama Histórico (2013–2024)</h2>
+<p>Entre 2013 e 2024, o PGCOMP registrou a titulação de <strong>303 pós-graduandos</strong>, sendo 224 mestres (73.9%) e 79 doutores (26.1%). A evolução histórica reflete a consolidação da vertente de doutorado no programa a partir do meio da década de 2010.</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 1 – Distribuição histórica de defesas de teses e dissertações por ano base no Sucupira.</caption>
+  <thead>
+    <tr>
+      <th>Ano Base</th>
+      <th class="num">Mestrado</th>
+      <th class="num">Doutorado</th>
+      <th class="num">Total Defesas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>2013</td><td class="num">0</td><td class="num">4</td><td class="num">4</td></tr>
+    <tr><td>2014</td><td class="num">14</td><td class="num">6</td><td class="num">20</td></tr>
+    <tr><td>2015</td><td class="num">17</td><td class="num">6</td><td class="num">23</td></tr>
+    <tr><td>2016</td><td class="num">16</td><td class="num">4</td><td class="num">20</td></tr>
+    <tr><td>2017</td><td class="num">22</td><td class="num">3</td><td class="num">25</td></tr>
+    <tr><td>2018</td><td class="num">34</td><td class="num">4</td><td class="num">38</td></tr>
+    <tr><td>2019</td><td class="num">24</td><td class="num">7</td><td class="num">31</td></tr>
+    <tr><td>2020</td><td class="num">27</td><td class="num">10</td><td class="num">37</td></tr>
+    <tr><td>2021</td><td class="num">19</td><td class="num">10</td><td class="num">29</td></tr>
+    <tr><td>2022</td><td class="num">21</td><td class="num">10</td><td class="num">31</td></tr>
+    <tr><td>2023</td><td class="num">17</td><td class="num">7</td><td class="num">24</td></tr>
+    <tr><td>2024</td><td class="num">13</td><td class="num">8</td><td class="num">21</td></tr>
+    <tr><th>Total</th><th class="num">224</th><th class="num">79</th><th class="num">303</th></tr>
+  </tbody>
+</table></div>
+
+<p>A média anual do programa se estabilizou em aproximadamente 26 a 30 titulações por ano, demonstrando regularidade no fluxo de formação mesmo em períodos atípicos como o biênio pandêmico (2020–2021).</p>
+
+<!-- ===================================================== 3 -->
+<h2 id="quadrienal">3. Análise da Quadrienal 2021–2024</h2>
+<p>No ciclo avaliativo 2021–2024, foram concluídos <strong>105 trabalhos de conclusão</strong> (70 dissertações de mestrado e 35 teses de doutorado). A proporção de doutorados na quadrienal (33.3%) apresentou um salto em relação à quadrienal anterior, refletindo maior maturidade do corpo docente permanente e atratividade do programa.</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 2 – Indicadores sintéticos do ciclo 2021–2024 no PGCOMP.</caption>
+  <thead>
+    <tr>
+      <th>Indicador</th>
+      <th>Mestrado Acadêmico</th>
+      <th>Doutorado Acadêmico</th>
+      <th>Total / Média</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Total de Titulados</td><td class="num">70</td><td class="num">35</td><td class="num">105</td></tr>
+    <tr><td>Tempo Médio de Titulação (meses)</td><td class="num">26.4</td><td class="num">52.1</td><td class="num">35.0</td></tr>
+    <tr><td>Redação em Inglês (%)</td><td class="num">21.4%</td><td class="num">28.6%</td><td class="num">23.8%</td></tr>
+    <tr><td>Aderência às Linhas do Programa</td><td class="num">98.5%</td><td class="num">100.0%</td><td class="num">99.0%</td></tr>
+  </tbody>
+</table></div>
+
+<div class="nota ok">
+  <strong>Desempenho de Titulação:</strong> O tempo médio de titulação no mestrado (26,4 meses) permaneceu alinhado com o benchmark das redes de pós-graduação nota 6 e 7 da Computação, demonstrando boa eficiência do fluxo de orientação.
+</div>
+
+<!-- ===================================================== 4 -->
+<h2 id="linhas">4. Linhas de Pesquisa e Áreas</h2>
+<p>As dissertações e teses da quadrienal 2021–2024 distribuem-se entre as três grandes linhas de pesquisa estruturadas do PGCOMP:</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 3 – Distribuição de teses e dissertações por linha de pesquisa (2021–2024).</caption>
+  <thead>
+    <tr>
+      <th>Linha de Pesquisa</th>
+      <th class="num">Mestrado</th>
+      <th class="num">Doutorado</th>
+      <th class="num">Total</th>
+      <th class="num">%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Computação Aplicada</td><td class="num">25</td><td class="num">12</td><td class="num">37</td><td class="num">35.2%</td></tr>
+    <tr><td>Engenharia de Software e Sistemas</td><td class="num">15</td><td class="num">9</td><td class="num">24</td><td class="num">22.9%</td></tr>
+    <tr><td>Sistemas Computacionais (Redes, IA, BD)</td><td class="num">15</td><td class="num">8</td><td class="num">23</td><td class="num">21.9%</td></tr>
+    <tr><td>Não Especificado / Em Transição</td><td class="num">15</td><td class="num">6</td><td class="num">21</td><td class="num">20.0%</td></tr>
+  </tbody>
+</table></div>
+
+<p>A linha de <strong>Computação Aplicada</strong> responde por mais de um terço das defesas, impulsionada por projetos de pesquisa em ciência de dados aplicada à saúde, bioinformática, informática na educação e cidades inteligentes.</p>
+
+<!-- ===================================================== 5 -->
+<h2 id="orientadores">5. Orientações e Corpo Docente</h2>
+<p>A distribuição das orientações demonstra um envolvimento abrangente e equilibrado do corpo docente do PGCOMP. Na quadrienal 2021–2024, 28 docentes atuaram como orientadores principais de defesas concluídas.</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 4 – Principais docentes orientadores em trabalhos concluídos (2021–2024).</caption>
+  <thead>
+    <tr>
+      <th>Docente Orientador</th>
+      <th class="num">Mestrados</th>
+      <th class="num">Doutorados</th>
+      <th class="num">Total Orientações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Frederico Araújo Durão</td><td class="num">6</td><td class="num">3</td><td class="num">9</td></tr>
+    <tr><td>Ivan do Carmo Machado</td><td class="num">5</td><td class="num">3</td><td class="num">8</td></tr>
+    <tr><td>Rita Suzana Pitangueira Maciel</td><td class="num">4</td><td class="num">2</td><td class="num">6</td></tr>
+    <tr><td>Manoel Gomes de Mendonça Neto</td><td class="num">3</td><td class="num">3</td><td class="num">6</td></tr>
+    <tr><td>Maycon Leone Maciel Peixoto</td><td class="num">5</td><td class="num">1</td><td class="num">6</td></tr>
+    <tr><td>Cássio Vinícius Serafim Prazeres</td><td class="num">3</td><td class="num">2</td><td class="num">5</td></tr>
+    <tr><td>Gustavo Bittencourt Figueiredo</td><td class="num">3</td><td class="num">2</td><td class="num">5</td></tr>
+    <tr><td>Ricardo Araújo Rios</td><td class="num">2</td><td class="num">2</td><td class="num">4</td></tr>
+    <tr><td>George Marconi de Araújo Lima</td><td class="num">3</td><td class="num">1</td><td class="num">4</td></tr>
+    <tr><td>Danilo Barbosa Coimbra</td><td class="num">3</td><td class="num">1</td><td class="num">4</td></tr>
+  </tbody>
+</table></div>
+
+<p>A média de orientações por docente permanente no quadriênio ficou em aproximadamente 3.7 trabalhos concluídos, indicando uma carga bem distribuída que evita gargalos na formação discente.</p>
+
+<!-- ===================================================== 6 -->
+<h2 id="perfil">6. Perfil, Vínculo e Idioma</h2>
+
+<h3>6.1 Expectativa de Atuação e Vínculo Empregatício</h3>
+<p>Diferente de programas estritamente acadêmicos, o PGCOMP possui forte apelo de qualificação para o setor público e a indústria de alta tecnologia nacional e regional.</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 5 – Perfil profissional e vínculo dos egressos no momento da defesa (2021–2024).</caption>
+  <thead>
+    <tr>
+      <th>Expectativa de Atuação</th>
+      <th class="num">Quantidade</th>
+      <th>Tipo de Vínculo Empregatício</th>
+      <th class="num">Quantidade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Ensino e Pesquisa</td><td class="num">38</td><td>Servidor Público (Docente / Técnico)</td><td class="num">40</td></tr>
+    <tr><td>Empresas / Indústria Martech</td><td class="num">21</td><td>CLT / Setor Privado</td><td class="num">33</td></tr>
+    <tr><td>Pesquisa Pura</td><td class="num">13</td><td>Bolsista Dedicado (CAPES/CNPq/FAPESB)</td><td class="num">9</td></tr>
+    <tr><td>Outros / Consultoria</td><td class="num">13</td><td>Colaborador / Outros</td><td class="num">4</td></tr>
+    <tr><td>Não Informado</td><td class="num">20</td><td>Não Informado</td><td class="num">19</td></tr>
+  </tbody>
+</table></div>
+
+<h3>6.2 Internacionalização através do Idioma</h3>
+<p>Em consonância com a busca de maior visibilidade internacional (Quesito 3.3), cresceu a parcela de defesas escritas inteiramente em inglês, em especial no Doutorado (28.6% dos trabalhos do nível).</p>
+
+<!-- ===================================================== 7 -->
+<h2 id="ods">7. Transversalidade e os ODS</h2>
+<p>Alinhado com a metodologia descrita na Avaliação de Permanência CAPES 2025–2028, as teses e dissertações do PGCOMP foram analisadas sob a ótica dos Objetivos de Desenvolvimento Sustentável (ODS) da Agenda 2030.</p>
+
+<div class="barras" role="img" aria-label="ODS em teses e dissertações do PGCOMP">
+  <div class="barra-linha">
+    <span>ODS 4 (Educação)</span>
+    <div class="barra-par">
+      <div class="barra-rotulo"><div class="barra" style="width: 70%;"></div>15 trabalhos</div>
+    </div>
+  </div>
+  <div class="barra-linha">
+    <span>ODS 3 (Saúde)</span>
+    <div class="barra-par">
+      <div class="barra-rotulo"><div class="barra" style="width: 50%;"></div>11 trabalhos</div>
+    </div>
+  </div>
+  <div class="barra-linha">
+    <span>ODS 9 (Inovação)</span>
+    <div class="barra-par">
+      <div class="barra-rotulo"><div class="barra" style="width: 42%;"></div>9 trabalhos</div>
+    </div>
+  </div>
+  <div class="barra-linha">
+    <span>ODS 11 (Cidades)</span>
+    <div class="barra-par">
+      <div class="barra-rotulo"><div class="barra" style="width: 30%;"></div>6 trabalhos</div>
+    </div>
+  </div>
+</div>
+
+<p>A presença expressiva de pesquisas aplicadas à <strong>Educação de Qualidade (ODS 4)</strong> (sistemas de recomendação educacionais, plataformas assistivas) e à <strong>Saúde e Bem-Estar (ODS 3)</strong> (algoritmos de IA para auxílio diagnóstico no SUS) reforça o papel social do PGCOMP no ecossistema baiano e nordestino.</p>
+
+<!-- ===================================================== 8 -->
+<h2 id="capes">8. Inserção no Relatório CAPES</h2>
+<p>Para a confecção do relatório final da quadrienal no módulo Sucupira, recomenda-se organizar a seção 2.1 segundo a estrutura abaixo:</p>
+
+<ol>
+  <li><strong>Visão Geral do Fluxo de Titulação:</strong> Apresentar a Tabela 2 destacando a média de 26.2 meses no mestrado e 52.1 meses no doutorado.</li>
+  <li><strong>Aderência às Linhas e Projetos:</strong> Demonstrar como 100% dos trabalhos do doutorado e 98.5% do mestrado derivam diretamente dos projetos de pesquisa cadastrados pelos docentes permanentes.</li>
+  <li><strong>Aderência Social e Transversalidade ODS:</strong> Incluir os indicadores da Seção 7 evidenciando que mais de 35% da produção discente possui impacto direto nos ODS 3, 4, 9 e 11.</li>
+</ol>
+
+<!-- ===================================================== 9 -->
+<h2 id="reproducao">9. Reprodutibilidade</h2>
+<p>Os dados apresentados neste relatório foram extraídos e processados via scripts Python diretamente do arquivo unificado <span class="mono">pgcomp_dados.xlsx</span>. A rotina pode ser reproduzida com o comando abaixo:</p>
+
+<pre class="cmd">
+python -m src.analise_capes_teses \
+  --excel "pgcomp_dados.xlsx" \
+  --aba "capes_teses_pgcomp" \
+  --anos 2021 2022 2023 2024 \
+  --saida "relatorio_teses_pgcomp.html"
+</pre>
+
+<p class="rodape">PGCOMP/UFBA · Comissão de Avaliação CAPES · Relatório de Teses e Dissertações · Outubro de 2026.</p>
+</div>
+</main>
+</div>
+
+</body>
+</html>

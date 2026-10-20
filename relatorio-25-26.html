@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Parcial: Teses e Dissertações PGCOMP (2025–2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: documento técnico em coluna única (~68ch), sumário lateral fixo em telas largas, tabelas roláveis. */
+:root {
+  --bg: #f6f7f9; --papel: #ffffff; --fg: #1a2230; --suave: #566173; --linha: #d8dde5;
+  --acento: #1d4f7a; --acento-fundo: #e8f0f7; --aviso: #7a4b00; --aviso-fundo: #fff3dc;
+  --ok: #1f6b3a; --ok-fundo: #e5f3ea; --codigo-fundo: #eef1f5;
+  --f-titulo: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-texto: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11161d; --papel: #171e27; --fg: #e3e8ef; --suave: #9aa6b6; --linha: #2c3643;
+  --acento: #8cbde6; --acento-fundo: #1c2a39; --aviso: #f0c574; --aviso-fundo: #2e2515;
+  --ok: #8fd3a6; --ok-fundo: #16291e; --codigo-fundo: #1f2833; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11161d; --papel: #171e27; --fg: #e3e8ef; --suave: #9aa6b6; --linha: #2c3643;
+  --acento: #8cbde6; --acento-fundo: #1c2a39; --aviso: #f0c574; --aviso-fundo: #2e2515;
+  --ok: #8fd3a6; --ok-fundo: #16291e; --codigo-fundo: #1f2833; color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--f-texto); font-size: 17px; line-height: 1.6; margin: 0; }
+.pagina { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 72px; }
+@media (min-width: 1040px) { .pagina { grid-template-columns: 250px minmax(0, 1fr); } }
+
+nav.sumario { font-size: 14px; line-height: 1.45; }
+@media (min-width: 1040px) { nav.sumario { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; max-height: calc(100vh - 48px); overflow-y: auto; } }
+nav.sumario h2 { font-family: var(--f-texto); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--suave); margin: 0 0 8px; }
+nav.sumario ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+nav.sumario a { color: var(--fg); text-decoration: none; display: block; padding: 2px 0; }
+nav.sumario a:hover, nav.sumario a:focus-visible { color: var(--acento); text-decoration: underline; }
+
+main { min-width: 0; background: var(--papel); border: 1px solid var(--linha); border-radius: 6px; padding-inline: clamp(18px, 5vw, 64px); padding-block: 48px 64px; }
+.texto { max-width: 70ch; }
+
+h1, h2, h3, h4 { font-family: var(--f-titulo); text-wrap: balance; line-height: 1.25; color: var(--fg); }
+h1 { font-size: clamp(30px, 4.4vw, 42px); font-weight: 700; margin: 8px 0 12px; }
+h2 { font-size: 27px; font-weight: 700; margin: 56px 0 14px; padding-top: 18px; border-top: 1px solid var(--linha); }
+h3 { font-size: 20px; font-weight: 600; margin: 32px 0 8px; }
+h4 { font-size: 17px; font-weight: 600; margin: 22px 0 6px; font-family: var(--f-texto); }
+
+p { margin: 0 0 14px; }
+ul, ol { margin: 0 0 14px; padding-left: 22px; }
+li { margin-bottom: 4px; }
+a { color: var(--acento); }
+
+.sobretitulo { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--suave); font-weight: 600; }
+.subtitulo { font-size: 19px; color: var(--suave); margin-bottom: 24px; max-width: 62ch; }
+
+.ficha { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px 28px; margin: 24px 0 8px; padding: 18px 0; border-block: 1px solid var(--linha); font-size: 15px; }
+.ficha div { min-width: 0; }
+.ficha dt { color: var(--suave); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.ficha dd { margin: 2px 0 0; font-weight: 600; }
+
+code, .mono { font-family: var(--f-mono); font-size: .86em; background: var(--codigo-fundo); padding: 1px 5px; border-radius: 3px; overflow-wrap: anywhere; }
+pre.cmd { font-family: var(--f-mono); font-size: 13.5px; background: var(--codigo-fundo); padding: 14px 16px; border-radius: 4px; overflow-x: auto; line-height: 1.5; margin: 0 0 16px; }
+
+.nota { border-left: 3px solid var(--aviso); background: var(--aviso-fundo); padding: 12px 16px; margin: 16px 0 20px; border-radius: 0 4px 4px 0; font-size: 15.5px; }
+.nota strong { color: var(--aviso); }
+.nota.ok { border-left-color: var(--ok); background: var(--ok-fundo); }
+.nota.ok strong { color: var(--ok); }
+
+.tabela { overflow-x: auto; margin: 12px 0 22px; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-size: 13.5px; color: var(--suave); padding-bottom: 6px; caption-side: top; }
+th, td { text-align: left; vertical-align: top; padding: 7px 10px; border-bottom: 1px solid var(--linha); }
+th { font-weight: 700; font-size: 13px; letter-spacing: .03em; color: var(--suave); border-bottom: 2px solid var(--linha); }
+td.num, th.num { text-align: right; white-space: nowrap; }
+
+.ods { display: inline-grid; place-items: center; min-width: 2.1em; height: 1.55em; padding: 0 5px; border-radius: 3px; font-family: var(--f-texto); font-weight: 700; font-size: 12.5px; color: #fff; line-height: 1; vertical-align: 1px; }
+.ods.n18, .ods.n19, .ods.n20 { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1.5px var(--suave); }
+.o1{background:#E5243B}.o2{background:#DDA63A}.o3{background:#4C9F38}.o4{background:#C5192D}.o5{background:#FF3A21}.o6{background:#26BDE2}.o7{background:#FCC30B;color:#1a1a1a}.o8{background:#A21942}.o9{background:#FD6925}.o10{background:#DD1367}.o11{background:#FD9D24;color:#1a1a1a}.o12{background:#BF8B2E}.o13{background:#3F7E44}.o14{background:#0A97D9}.o15{background:#56C02B}.o16{background:#00689D}.o17{background:#19486A}
+
+.barras { display: grid; gap: 7px; margin: 14px 0 6px; }
+.barra-linha { display: grid; grid-template-columns: 3.2em minmax(0, 1fr); gap: 10px; align-items: center; }
+.barra-par { display: grid; gap: 3px; }
+.barra { height: 11px; border-radius: 2px; background: var(--acento); }
+.barra.b2 { background: transparent; box-shadow: inset 0 0 0 1.5px var(--acento); }
+.barra-rotulo { display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--suave); font-variant-numeric: tabular-nums; }
+.legenda { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13.5px; color: var(--suave); margin-bottom: 4px; }
+.legenda span { display: inline-flex; align-items: center; gap: 6px; }
+.amostra { width: 18px; height: 10px; border-radius: 2px; background: var(--acento); display: inline-block; }
+.amostra.b2 { background: transparent; box-shadow: inset 0 0 0 1.5px var(--acento); }
+
+.status { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .03em; padding: 1px 7px; border-radius: 10px; white-space: nowrap; }
+.s-feito { background: var(--ok-fundo); color: var(--ok); }
+.s-parcial { background: var(--aviso-fundo); color: var(--aviso); }
+.s-nao { background: var(--codigo-fundo); color: var(--suave); }
+
+.rodape { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--linha); font-size: 14px; color: var(--suave); }
+:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<div class="pagina">
+<nav class="sumario" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#apresentacao">1. Apresentação</a></li>
+    <li><a href="#universo">2. Universo das Defesas (2025–2026)</a></li>
+    <li><a href="#deposito">3. Cobertura do Repositório Institucional</a></li>
+    <li><a href="#linhas">4. Distribuição por Linha de Pesquisa</a></li>
+    <li><a href="#classificacao">5. Classificação por ODS (Regras × LLM)</a></li>
+    <li><a href="#producao">6. Produção Científica e Projetos</a></li>
+    <li><a href="#melhorias">7. Propostas de Melhoria do Relatório</a></li>
+    <li><a href="#reproducao">8. Reprodutibilidade e Comandos</a></li>
+  </ol>
+</nav>
+
+<main>
+<div class="texto">
+<div class="sobretitulo">PGCOMP/UFBA · Avaliação de Permanência CAPES 2025–2028</div>
+<h1>Levantamento e Análise de Teses e Dissertações (2025–2026)</h1>
+<p class="subtitulo">Relatório parcial consolidado dos dados do biênio 2025–2026, com foco no acompanhamento metodológico, cobertura de repositórios e alinhamento aos Objetivos de Desenvolvimento Sustentável (ODS).</p>
+
+<dl class="ficha">
+  <div><dt>Responsável</dt><dd>Equipe PGCOMP/UFBA</dd></div>
+  <div><dt>Versão do relatório</dt><dd>0.3 (Biênio 2025–2026)</dd></div>
+  <div><dt>Situação em</dt><dd>Outubro/2026</dd></div>
+  <div><dt>Universo Analisado</dt><dd>48 Defesas (31 Mestrados · 17 Doutorados)</dd></div>
+  <div><dt>Período Coberto</dt><dd>2025 e 2026 (até 22/09/2026)</dd></div>
+  <div><dt>Status da Validação</dt><dd>Sugestões Automáticas / Fase de Anotação Humana</dd></div>
+</dl>
+
+<!-- ===================================================== 1 -->
+<h2 id="apresentacao">1. Apresentação</h2>
+<p>Este relatório reúne o mapeamento e a análise das **teses e dissertações defendidas no PGCOMP/UFBA durante o biênio 2025–2026** (dados coletados até 22/09/2026 via SIGAA e Repositório Institucional). A finalidade é fornecer insumos estruturados para subsidiar a Avaliação de Permanência CAPES (ciclo 2025–2028), integrando o <strong>Item 2.1 (Teses e Dissertações)</strong> e a dimensão transversal dos Objetivos de Desenvolvimento Sustentável (ODS).</p>
+<p>Atendendo ao direcionamento do acompanhamento docente, o documento apresenta a extração completa do biênio, o estado do depósito nos repositórios oficiais, as convergências entre modelos automáticos e as propostas de evolução contínua para o relatório do programa.</p>
+
+<!-- ===================================================== 2 -->
+<h2 id="universo">2. Universo das Defesas (2025–2026)</h2>
+<p>A coleta identificada no SIGAA capturou um total de 266 registros históricos. Destes, exatamente <strong>48 defesas únicas pertencem ao biênio 2025–2026</strong>. As demais 218 ocorrências foram filtradas e justificadas (anos anteriores, duplicatas de registro ou defesas com agendamento futuro).</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 1 – Distribuição do universo de defesas do PGCOMP no biênio 2025–2026.</caption>
+  <thead>
+    <tr>
+      <th>Ano Base</th>
+      <th>Nível / Grau Acadêmico</th>
+      <th class="num">Defesas Realizadas</th>
+      <th class="num">Com Depósito no RI</th>
+      <th class="num">% Cobertura RI</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>2025</td><td>Mestrado Acadêmico</td><td class="num">19</td><td class="num">13</td><td class="num">68.4%</td></tr>
+    <tr><td>2025</td><td>Doutorado Acadêmico</td><td class="num">11</td><td class="num">9</td><td class="num">81.8%</td></tr>
+    <tr><td>2026 (até 22/09)</td><td>Mestrado Acadêmico</td><td class="num">12</td><td class="num">3</td><td class="num">25.0%</td></tr>
+    <tr><td>2026 (até 22/09)</td><td>Doutorado Acadêmico</td><td class="num">6</td><td class="num">1</td><td class="num">16.7%</td></tr>
+    <tr><th>Total 2025</th><th>Ambos os Níveis</th><th class="num">30</th><th class="num">22</th><th class="num">73.3%</th></tr>
+    <tr><th>Total 2026</th><th>Ambos os Níveis</th><th class="num">18</th><th class="num">4</th><th class="num">22.2%</th></tr>
+    <tr><th>Total Geral</th><th>Biênio 2025–2026</th><th class="num">48</th><th class="num">26</th><th class="num">54.2%</th></tr>
+  </tbody>
+</table></div>
+
+<div class="nota ok">
+  <strong>Estabilidade dos Dados:</strong> A conferência entre snapshots em datas distintas confirmou estabilidade nos identificadores (hashes estáveis de titulação), assegurando a reprodutibilidade integral da base de 48 defesas.
+</div>
+
+<!-- ===================================================== 3 -->
+<h2 id="deposito">3. Cobertura do Repositório Institucional</h2>
+<p>Embora a página pública de defesas do SIGAA sirva como universo oficial das titulações, o Repositório Institucional (RI/UFBA) fornece os metadados enriquecidos (resumos em inglês, palavras-chave e links Lattes). A baixa cobertura observada em 2026 (22.2%) é decorrente do fluxo de tramitação cartorial e prazos regulamentares de embargo/depósito.</p>
+
+<ul>
+  <li><strong>Tempo de Depósito (2025):</strong> Entre as 22 defesas depositadas de 2025, a mediana para disponibilização no RI foi de <strong>105 dias</strong> (com máximo registrado de 549 dias).</li>
+  <li><strong>Defesas sem Depósito:</strong> Permanecem no universo analítico categorizadas sob a marcação <span class="mono">sem_deposito_no_snapshot</span>, evitando exclusão ou distorção nos indicadores do quesito 2.1.</li>
+</ul>
+
+<!-- ===================================================== 4 -->
+<h2 id="linhas">4. Distribuição por Linha de Pesquisa</h2>
+<p>Os trabalhos concluídos no biênio mantêm uma distribuição coerente com a estrutura curricular e a capacidade de orientação do PGCOMP:</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 2 – Traballhos de conclusão por Linha de Pesquisa no biênio 2025–2026.</caption>
+  <thead>
+    <tr>
+      <th>Linha de Pesquisa</th>
+      <th class="num">Mestrado (31)</th>
+      <th class="num">Doutorado (17)</th>
+      <th class="num">Total (48)</th>
+      <th class="num">Proporção (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Computação Aplicada</td><td class="num">12</td><td class="num">6</td><td class="num">18</td><td class="num">37.5%</td></tr>
+    <tr><td>Engenharia de Software e Sistemas</td><td class="num">8</td><td class="num">4</td><td class="num">12</td><td class="num">25.0%</td></tr>
+    <tr><td>Sistemas Computacionais (IA, Redes, BD)</td><td class="num">7</td><td class="num">4</td><td class="num">11</td><td class="num">22.9%</td></tr>
+    <tr><td>Em consolidação / Transição</td><td class="num">4</td><td class="num">3</td><td class="num">7</td><td class="num">14.6%</td></tr>
+  </tbody>
+</table></div>
+
+<!-- ===================================================== 5 -->
+<h2 id="classificacao">5. Classificação por ODS (Regras × LLM)</h2>
+<p>Aplicando a taxonomia ampliada de 20 Objetivos (ODS 1–17 ONU + ODS 18 Igualdade Étnico-Racial + ODS 19 Cultura/Arte + ODS 20 Povos Originários), foram executadas duas camadas automáticas de triagem sobre os textos das 48 defesas:</p>
+
+<ul>
+  <li><strong>Camada 1 (Regras Lexicais v0.2.2):</strong> Identificou relação Direta ou Indireta em <strong>18 trabalhos</strong> (20 pares ODS-trabalho).</li>
+  <li><strong>Camada 2 (LLM Claude Sonnet 5.5 / Ollama qwen3.5:9b):</strong> Sugeriu relação com evidência literal verificada em <strong>21 trabalhos</strong> (22 pares ODS-trabalho).</li>
+  <li><strong>Interseção:</strong> 16 trabalhos e 14 pares coincidentes entre ambas as abordagens.</li>
+</ul>
+
+<div class="nota">
+  <strong>Nota de Validação:</strong> Os números das camadas automáticas são preliminares. O protocolo do PGCOMP exige que a contagem final para a ficha CAPES seja respaldada pela anotação humana cega (Etapas 10 e 11) com cálculo do índice Kappa de Cohen.
+</div>
+
+<h4>Sugestões Diretas e Indiretas por ODS (Biênio 2025–2026)</h4>
+<div class="legenda"><span><i class="amostra"></i>Regras Lexicais</span><span><i class="amostra b2"></i>LLM (Claude Sonnet 5.5)</span></div>
+
+<div class="barras" role="img" aria-label="Barras de comparação de ODS em 2025-2026">
+  <div class="barra-linha"><span class="ods o3">3</span><div class="barra-par"><div class="barra-rotulo"><div class="barra" style="width:calc(14.3% * 4)"></div>4</div><div class="barra-rotulo"><div class="barra b2" style="width:calc(14.3% * 3)"></div>3</div></div></div>
+  <div class="barra-linha"><span class="ods o4">4</span><div class="barra-par"><div class="barra-rotulo"><div class="barra" style="width:calc(14.3% * 7)"></div>7</div><div class="barra-rotulo"><div class="barra b2" style="width:calc(14.3% * 7)"></div>7</div></div></div>
+  <div class="barra-linha"><span class="ods o7">7</span><div class="barra-par"><div class="barra-rotulo"><div class="barra" style="width:calc(14.3% * 2)"></div>2</div><div class="barra-rotulo"><div class="barra b2" style="width:calc(14.3% * 1)"></div>1</div></div></div>
+  <div class="barra-linha"><span class="ods o8">8</span><div class="barra-par"><div class="barra-rotulo">0</div><div class="barra-rotulo"><div class="barra b2" style="width:calc(14.3% * 2)"></div>2</div></div></div>
+  <div class="barra-linha"><span class="ods o9">9</span><div class="barra-par"><div class="barra-rotulo">0</div><div class="barra-rotulo"><div class="barra b2" style="width:calc(14.3% * 5)"></div>5</div></div></div>
+  <div class="barra-linha"><span class="ods o11">11</span><div class="barra-par"><div class="barra-rotulo"><div class="barra" style="width:calc(14.3% * 3)"></div>3</div><div class="barra-rotulo"><div class="barra b2" style="width:calc(14.3% * 2)"></div>2</div></div></div>
+  <div class="barra-linha"><span class="ods o16">16</span><div class="barra-par"><div class="barra-rotulo"><div class="barra" style="width:calc(14.3% * 2)"></div>2</div><div class="barra-rotulo"><div class="barra b2" style="width:calc(14.3% * 1)"></div>1</div></div></div>
+</div>
+
+<p>O <strong>ODS 4 (Educação de Qualidade)</strong> lidera isolado nas duas camadas (7 trabalhos), seguido pelo <strong>ODS 3 (Saúde e Bem-Estar)</strong> e <strong>ODS 9 (Inovação e Infraestrutura)</strong>, evidenciando o forte compromisso social da produção discente do PGCOMP.</p>
+
+<!-- ===================================================== 6 -->
+<h2 id="producao">6. Produção Científica e Projetos</h2>
+<p>A extração dos currículos Lattes das pessoas vinculadas às 48 defesas (48 egressos e 28 docentes orientadores/membros) revelou o seguinte volume de produção para o biênio 2025–2026:</p>
+
+<div class="tabela"><table>
+  <caption>Tabela 3 – Produção bibliográfica e projetos cadastrados (2025–2026).</caption>
+  <thead>
+    <tr>
+      <th>Categoria de Análise</th>
+      <th class="num">Registros Brutos</th>
+      <th class="num">Entidades Únicas</th>
+      <th>Aderência ODS (Regras v0.2.2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Obras Científicas (Artigos/Anais)</td><td class="num">464</td><td class="num">444</td><td>90 obras com ODS direto/indireto (20.3%)</td></tr>
+    <tr><td>  com indicação de DOI (OpenAlex)</td><td class="num">224</td><td class="num">217</td><td>68 obras com ODS atribuído na base externa</td></tr>
+    <tr><td>Projetos de Pesquisa e Desenvolvimento</td><td class="num">234</td><td class="num">191</td><td>92 projetos com sugestão ODS (48.1%)</td></tr>
+    <tr><td>Docentes com Projetos Ativos em 2025–2026</td><td class="num">28</td><td class="num">27</td><td>24 docentes vinculados a pesquisas ODS</td></tr>
+  </tbody>
+</table></div>
+
+<!-- ===================================================== 7 -->
+<h2 id="melhorias">7. Propostas de Melhoria do Relatório</h2>
+<p>Atendendo ao alinhamento com a coordenação do programa, o relatório evoluiu incorporando quatro melhorias fundamentais em relação aos ciclos anteriores:</p>
+
+<ol>
+  <li><strong>Inclusão da Dimensão Transversal dos ODS:</strong> Atendimento explícito às exigências para obtenção e manutenção das notas 6 e 7 no ciclo CAPES 2025–2028.</li>
+  <li><strong>Matriz de Agrupamento Único:</strong> Eliminação de dupla contagem de artigos e projetos coautorados entre múltiplos docentes/discentes via identificadores sintéticos de agrupamento (DOI e título normalizado).</li>
+  <li><strong>Rastreabilidade e Protocolo Aberto:</strong> Toda a extração e classificação do biênio está respaldada por manifests de coleta imutáveis em JSONL e testes de unidade integrados.</li>
+  <li><strong>Anotação Humana de Qualidade:</strong> Estruturação de fluxo cego duplo em planilha `.xlsx` para medir systematicamente o Kappa de Cohen antes da entrega à comissão da CAPES.</li>
+</ol>
+
+<!-- ===================================================== 8 -->
+<h2 id="reproducao">8. Reprodutibilidade e Comandos</h2>
+<p>O pipeline completo de reprocessamento dos dados de 2025–2026 pode ser reexecutado via terminal com a seguinte sequência de comandos:</p>
+
+<pre class="cmd">
+# 1. Construção da Taxonomia e Coleta no SIGAA (2025-2026)
+python -m src.construir_taxonomia
+python -m src.coleta_sigaa_defesas --id 1820 --anos 2025 2026
+python -m src.normalizar
+
+# 2. Execução da Camada de Regras e Lattes
+python -m src.classificar_regras data/interim/sigaa_defesas_2025_2026.jsonl
+python -m src.importar_lattes_html lattes --defesas data/interim/sigaa_defesas_2025_2026.jsonl --anos 2025 2026
+python -m src.coleta_producao --enriquecer data/interim/lattes_producao.jsonl
+
+# 3. Execução das Camadas LLM (Claude-CLI / Ollama Local)
+python -m src.classificar_llm_sem_api data/interim/sigaa_defesas_2025_2026.jsonl --backend claude-cli
+python -m src.classificar_llm_sem_api data/interim/sigaa_defesas_2025_2026.jsonl --backend ollama
+
+# 4. Consolidação e Agregação de Resultados
+python -m src.agregar data/interim/sigaa_defesas_2025_2026.jsonl --gold anotacao/sigaa_defesas_2025_2026_gold.csv
+</pre>
+
+<p class="rodape">PGCOMP/UFBA · Tópicos em Banco de Dados 3 · Relatório Parcial 2025–2026 · Outubro de 2026. Dados em fase de validação por anotação humana.</p>
+</div>
+</main>
+</div>
+
+</body>
+</html>
